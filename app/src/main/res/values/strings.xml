@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Hangman</string>
+    <string name="login_title">HangMan</string>
+    <string name="login_subtitle">-A Wizeline Academy - Project</string>
+    <string name="login_executors_name">Executor\'s name</string>
+    <string name="login_start">Start</string>
 </resources>
