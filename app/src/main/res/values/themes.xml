@@ -16,5 +16,7 @@
 
     <style name="Theme.Hangman.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:background">@drawable/background_gradient</item>
+        <item name="android:paddingHorizontal">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingVertical">@dimen/activity_vertical_margin</item>
     </style>
 </resources>

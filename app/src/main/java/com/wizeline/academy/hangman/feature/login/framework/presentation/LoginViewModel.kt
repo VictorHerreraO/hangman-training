@@ -50,11 +50,12 @@ class LoginViewModel @Inject constructor(
     }
 
     fun onUserNameChanged(userName: String) {
-        Log.d(TAG, "user name is $userName")
+        Log.d(TAG, "user name is [$userName]")
+        val trimmed = userName.trim()
         _loginState.update {
             it.copy(
-                userName = userName,
-                loginEnabled = userName.isNotEmpty()
+                userName = trimmed,
+                loginEnabled = trimmed.isNotEmpty()
             )
         }
     }
