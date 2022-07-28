@@ -9,5 +9,11 @@
         android:id="@+id/fragment_login"
         android:name="com.wizeline.academy.hangman.feature.login.framework.ui.LoginFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_nav_login_to_home"
+            app:destination="@id/fragment_login"
+            app:popUpTo="@id/fragment_login"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

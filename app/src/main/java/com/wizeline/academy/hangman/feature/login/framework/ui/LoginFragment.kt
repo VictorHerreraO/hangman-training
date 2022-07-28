@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.wizeline.academy.hangman.databinding.FragmentLoginBinding
+import com.wizeline.academy.hangman.feature.login.framework.presentation.LoginNavigation
 import com.wizeline.academy.hangman.feature.login.framework.presentation.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -45,8 +47,20 @@ class LoginFragment : Fragment() {
     private fun subscribeUi() = with(binding) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.loginState.collect { state ->
-                    btnStart.isEnabled = state.loginEnabled && !state.loginLoading
+                launch {
+                    viewModel.navigateTo.collect { navigationEvent ->
+                        navigationEvent.getContentIfNotHandled()?.let {
+                            val directions = when (it) {
+                                is LoginNavigation.NavigateHome -> LoginFragmentDirections.actionNavLoginToHome()
+                            }
+                            findNavController().navigate(directions)
+                        }
+                    }
+                }
+                launch {
+                    viewModel.loginState.collect { state ->
+                        btnStart.isEnabled = state.loginEnabled && !state.loginLoading
+                    }
                 }
             }
         }
