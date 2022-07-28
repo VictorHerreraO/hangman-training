@@ -1,7 +1,7 @@
 package com.wizeline.academy.hangman.feature.login.domain.usecase
 
 import com.soyvictorherrera.bdates.core.arch.UseCase
-import com.wizeline.academy.hangman.feature.common.data.repository.UserRepositoryContract
+import com.wizeline.academy.hangman.feature.common.data.user.repository.UserRepositoryContract
 import com.wizeline.academy.hangman.feature.common.domain.model.UserModel
 import javax.inject.Inject
 

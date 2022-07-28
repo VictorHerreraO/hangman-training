@@ -1,4 +1,4 @@
-package com.wizeline.academy.hangman.feature.common.data.repository
+package com.wizeline.academy.hangman.feature.common.data.user.repository
 
 import com.wizeline.academy.hangman.feature.common.domain.model.UserModel
 
