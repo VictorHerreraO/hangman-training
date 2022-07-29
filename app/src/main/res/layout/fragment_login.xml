@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,23 +16,26 @@
 
     <TextView
         android:id="@+id/tv_login_title"
-        style="@style/TextAppearance.MaterialComponents.Headline4"
+        style="@style/Theme.Hangman.Text.H4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_64"
         android:text="@string/login_title"
         android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@id/tv_login_subtitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/tv_login_subtitle"
+        style="@style/Theme.Hangman.Text.H6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_32"
+        android:layout_marginTop="@dimen/dimen_8"
         android:text="@string/login_subtitle"
         android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@id/iv_wize_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_login_title" />
@@ -42,7 +44,9 @@
         android:id="@+id/iv_wize_logo"
         android:layout_width="@dimen/login_logo_size"
         android:layout_height="@dimen/login_logo_size"
+        android:layout_marginTop="@dimen/dimen_8"
         android:scaleType="centerInside"
+        app:layout_constraintBottom_toTopOf="@id/guide_header"
         app:layout_constraintEnd_toStartOf="@id/iv_hangman_logo"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,9 +58,10 @@
         android:layout_width="@dimen/login_logo_size"
         android:layout_height="@dimen/login_logo_size"
         android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@id/iv_wize_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_wize_logo"
-        app:layout_constraintTop_toBottomOf="@id/tv_login_subtitle"
+        app:layout_constraintTop_toTopOf="@id/iv_wize_logo"
         app:srcCompat="@mipmap/ic_hangman_logo" />
 
 
