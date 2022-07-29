@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_50">#80FFFFFF</color>
+    <color name="moonstone">#2A9CBB</color>
+    <color name="genoa">#146b75</color>
+    <color name="skobeloff">#0E7777</color>
+    <color name="majorelle_blue">#643AD9</color>
 </resources>

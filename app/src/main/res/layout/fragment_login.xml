@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-    android:layout_marginVertical="@dimen/activity_vertical_margin">
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@id/guide_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_waves" />
 
     <TextView
         android:id="@+id/tv_login_title"
         style="@style/TextAppearance.MaterialComponents.Headline4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_64"
         android:text="@string/login_title"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,6 +31,7 @@
         android:id="@+id/tv_login_subtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_32"
         android:text="@string/login_subtitle"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,47 +42,66 @@
         android:id="@+id/iv_wize_logo"
         android:layout_width="@dimen/login_logo_size"
         android:layout_height="@dimen/login_logo_size"
+        android:scaleType="centerInside"
         app:layout_constraintEnd_toStartOf="@id/iv_hangman_logo"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_login_subtitle" />
+        app:layout_constraintTop_toBottomOf="@id/tv_login_subtitle"
+        app:srcCompat="@mipmap/ic_wizeline_logo" />
 
     <ImageView
         android:id="@+id/iv_hangman_logo"
         android:layout_width="@dimen/login_logo_size"
         android:layout_height="@dimen/login_logo_size"
+        android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_wize_logo"
-        app:layout_constraintTop_toBottomOf="@id/tv_login_subtitle" />
+        app:layout_constraintTop_toBottomOf="@id/tv_login_subtitle"
+        app:srcCompat="@mipmap/ic_hangman_logo" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/bar_header"
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="iv_wize_logo,iv_hangman_logo" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".4" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txt_input_name"
+
+    <TextView
+        android:id="@+id/tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/login_executors_name"
+        android:layout_marginTop="@dimen/dimen_48"
+        android:text="@string/login_executors_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bar_header">
+        app:layout_constraintTop_toBottomOf="@id/guide_header"
+        app:layout_constraintWidth_max="350dp" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_txt_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <EditText
+        android:id="@+id/ed_txt_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_8"
+        android:background="@drawable/background_edit_text"
+        android:imeOptions="actionGo"
+        android:inputType="textCapWords"
+        android:maxLines="1"
+        android:minHeight="@dimen/dimen_40"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        app:layout_constraintWidth_max="350dp" />
 
     <Button
         android:id="@+id/btn_start"
+        style="@style/Theme.Hangman.Button.Primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_64"
         android:text="@string/login_start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_input_name" />
+        app:layout_constraintTop_toBottomOf="@id/ed_txt_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>
