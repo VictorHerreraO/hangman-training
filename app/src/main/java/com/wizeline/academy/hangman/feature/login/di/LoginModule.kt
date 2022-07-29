@@ -6,11 +6,11 @@ import com.wizeline.academy.hangman.feature.login.domain.usecase.LoginUserUseCas
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
-import dagger.hilt.components.SingletonComponent
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 class LoginModule {
 
     @[Provides ViewModelScoped]

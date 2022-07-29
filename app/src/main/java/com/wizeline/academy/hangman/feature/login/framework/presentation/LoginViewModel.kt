@@ -3,8 +3,9 @@ package com.wizeline.academy.hangman.feature.login.framework.presentation
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.soyvictorherrera.bdates.core.arch.UseCase
 import com.wizeline.academy.hangman.core.util.Event
-import com.wizeline.academy.hangman.feature.login.domain.usecase.LoginUserUseCase
+import com.wizeline.academy.hangman.feature.common.domain.model.UserModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val loginUserUseCase: LoginUserUseCase
+    private val loginUserUseCase: UseCase<String, Result<UserModel>>
 ) : ViewModel() {
     private companion object {
         const val TAG = "LoginViewModel"
@@ -26,7 +27,7 @@ class LoginViewModel @Inject constructor(
     private val _loginState = MutableStateFlow(LoginViewState())
     val loginState = _loginState.asStateFlow()
 
-    fun login() = with(_loginState.value) {
+    fun login(): Unit = with(_loginState.value) {
         viewModelScope.launch {
             Log.d(TAG, "Do login here!")
             _loginState.update {
