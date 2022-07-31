@@ -11,6 +11,8 @@ import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.AuthIn
 import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.ImdbApi
 import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.MovieDto
 import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.MoviesClient
+import com.wizeline.academy.hangman.feature.game.data.repository.ChallengeRepositoryContract
+import com.wizeline.academy.hangman.feature.game.data.repository.impl.ChallengeRepository
 import com.wizeline.academy.hangman.feature.game.data.repository.mapper.MovieDtoToChallengeModelMapper
 import dagger.Module
 import dagger.Provides
@@ -20,6 +22,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import javax.inject.Named
@@ -71,6 +74,7 @@ class GameModule {
         okHttpClient: OkHttpClient
     ): Retrofit = Retrofit.Builder()
         .baseUrl(ImdbApi.BASE_URL)
+        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(okHttpClient)
         .build()
@@ -89,5 +93,10 @@ class GameModule {
     fun provideMovieDtoToChallengeModelMapper(
         movieDtoToChallengeModelMapper: MovieDtoToChallengeModelMapper
     ): Mapper<MovieDto, ChallengeModel> = movieDtoToChallengeModelMapper
+
+    @Provides
+    fun provideChallengeRepositoryContract(
+        challengeRepository: ChallengeRepository
+    ): ChallengeRepositoryContract = challengeRepository
 
 }
