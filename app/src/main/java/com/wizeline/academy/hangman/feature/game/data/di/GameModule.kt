@@ -2,9 +2,15 @@ package com.wizeline.academy.hangman.feature.game.data.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.soyvictorherrera.bdates.core.arch.Mapper
 import com.wizeline.academy.hangman.BuildConfig
+import com.wizeline.academy.hangman.feature.game.ChallengeModel
+import com.wizeline.academy.hangman.feature.game.data.datasource.MoviesRemoteDataSourceContract
+import com.wizeline.academy.hangman.feature.game.data.datasource.impl.MoviesRemoteDataSource
 import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.ImdbApi
+import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.MovieDto
 import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.MoviesClient
+import com.wizeline.academy.hangman.feature.game.data.repository.mapper.MovieDtoToChallengeModelMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -60,5 +66,15 @@ class GameModule {
     fun provideMoviesClient(
         retrofit: Retrofit
     ): MoviesClient = retrofit.create()
+
+    @Provides
+    fun provideMoviesRemoteDataSourceContract(
+        moviesRemoteDataSource: MoviesRemoteDataSource
+    ): MoviesRemoteDataSourceContract = moviesRemoteDataSource
+
+    @Provides
+    fun provideMovieDtoToChallengeModelMapper(
+        movieDtoToChallengeModelMapper: MovieDtoToChallengeModelMapper
+    ): Mapper<MovieDto, ChallengeModel> = movieDtoToChallengeModelMapper
 
 }
