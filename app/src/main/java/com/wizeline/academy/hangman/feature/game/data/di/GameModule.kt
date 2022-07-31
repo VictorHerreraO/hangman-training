@@ -7,6 +7,7 @@ import com.wizeline.academy.hangman.BuildConfig
 import com.wizeline.academy.hangman.feature.game.ChallengeModel
 import com.wizeline.academy.hangman.feature.game.data.datasource.MoviesRemoteDataSourceContract
 import com.wizeline.academy.hangman.feature.game.data.datasource.impl.MoviesRemoteDataSource
+import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.AuthInterceptor
 import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.ImdbApi
 import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.MovieDto
 import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.MoviesClient
@@ -29,6 +30,7 @@ class GameModule {
 
     private companion object {
         const val LOGGING_INTERCEPTOR = "logging_interceptor"
+        const val AUTH_INTERCEPTOR = "auth_interceptor"
     }
 
     @Provides
@@ -43,11 +45,22 @@ class GameModule {
         HttpLoggingInterceptor.Level.BODY
     )
 
+    @[Provides Named(AUTH_INTERCEPTOR)]
+    fun provideAuthInterceptor(
+
+    ): Interceptor {
+        return AuthInterceptor(
+            apiKey = BuildConfig.API_KEY
+        )
+    }
+
     @Provides
     fun provideOkHttpClient(
+        @Named(AUTH_INTERCEPTOR) authInterceptor: Interceptor,
         @Named(LOGGING_INTERCEPTOR) loggingInterceptor: Interceptor
     ): OkHttpClient = OkHttpClient.Builder()
         .apply {
+            addInterceptor(authInterceptor)
             if (BuildConfig.DEBUG) addInterceptor(loggingInterceptor)
         }
         .build()
