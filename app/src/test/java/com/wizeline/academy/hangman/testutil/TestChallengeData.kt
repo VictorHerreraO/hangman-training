@@ -1,6 +1,6 @@
 package com.wizeline.academy.hangman.testutil
 
-import com.wizeline.academy.hangman.feature.game.ChallengeModel
+import com.wizeline.academy.hangman.feature.game.domain.model.ChallengeModel
 
 object TestChallengeData {
 

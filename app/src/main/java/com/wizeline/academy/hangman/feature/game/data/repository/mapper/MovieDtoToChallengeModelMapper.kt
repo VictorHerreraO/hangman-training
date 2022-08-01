@@ -1,7 +1,7 @@
 package com.wizeline.academy.hangman.feature.game.data.repository.mapper
 
 import com.soyvictorherrera.bdates.core.arch.Mapper
-import com.wizeline.academy.hangman.feature.game.ChallengeModel
+import com.wizeline.academy.hangman.feature.game.domain.model.ChallengeModel
 import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.MovieDto
 import javax.inject.Inject
 
