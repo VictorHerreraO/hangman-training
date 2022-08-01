@@ -1,5 +1,6 @@
 package com.wizeline.academy.hangman.testutil
 
+import com.wizeline.academy.hangman.feature.game.ChallengeModel
 import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.MovieDto
 import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.MovieListDto
 
@@ -8,6 +9,10 @@ object TestMoviesData {
     val movie_dto_1 = MovieDto(
         id = 1L,
         title = "Movie 1"
+    )
+
+    val challenge_1 = ChallengeModel(
+        text = movie_dto_1.title!!
     )
 
     val movie_dto_2 = MovieDto(
