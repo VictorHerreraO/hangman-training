@@ -7,6 +7,7 @@ import io.reactivex.rxjava3.core.Single
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.AdditionalMatchers.*
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
@@ -21,6 +22,10 @@ class MoviesRemoteDataSourceTest {
     private lateinit var subjectUnderTest: MoviesRemoteDataSource
 
     private val expectedMoviesListDto = TestMoviesData.movies_list_dto_1
+
+    private val pageFloor = 1
+
+    private val pageCeil = 500
 
     @Before
     fun setup() {
@@ -39,36 +44,34 @@ class MoviesRemoteDataSourceTest {
 
     @Test
     fun `assert that getRandomPopularMovies calls client with page number`() {
-        val result = subjectUnderTest.getRandomPopularMovies()
+        subjectUnderTest.getRandomPopularMovies().test().run {
+            assertComplete()
+            assertNoErrors()
+            assertValue { list ->
+                list == expectedMoviesListDto.results
+            }
+        }
 
-        assertThat(result).isNotNull()
-
-        val captor = argumentCaptor<Int>()
         verify(mockMoviesClient).getPopularMovies(
-            page = captor.capture(),
+            page = and(geq(pageFloor), leq(pageCeil)),
             language = anyOrNull(),
             region = anyOrNull()
         )
-        captor.firstValue.let { page ->
-            assertThat(page).isNotNull()
-            assertThat(page).isGreaterThan(0)
-        }
     }
 
     @Test
-    fun `assert that getRandomPopularMovies generates page number between 1 and 500`() {
-        val expectedRange = 1..500
+    fun `assert that getRandomPopularMovies generates page number between pageFloor and pageCeil`() {
+        val expectedRange = pageFloor..pageCeil
 
         for (i in expectedRange) subjectUnderTest.getRandomPopularMovies()
 
         val captor = argumentCaptor<Int>()
-        verify(mockMoviesClient, atLeastOnce()).getPopularMovies(
+        verify(mockMoviesClient, times(pageCeil)).getPopularMovies(
             page = captor.capture(),
             language = anyOrNull(),
             region = anyOrNull()
         )
         captor.allValues.forEach { value ->
-            println("checking if $value is in range")
             assertThat(value).isIn(expectedRange)
         }
     }
@@ -78,13 +81,15 @@ class MoviesRemoteDataSourceTest {
         val expectedPage = expectedMoviesListDto.page!!.toInt()
         val expectedList = expectedMoviesListDto.results!!
 
-        val result = subjectUnderTest.getPopularMovies(page = expectedPage)
-
-        assertThat(result).isNotNull()
-        verify(mockMoviesClient).getPopularMovies(eq(expectedPage), anyOrNull(), anyOrNull())
-        result.blockingGet().let { list ->
-            assertThat(list).isEqualTo(expectedList)
+        subjectUnderTest.getPopularMovies(page = expectedPage).test().run {
+            assertComplete()
+            assertNoErrors()
+            assertValue { list ->
+                list == expectedList
+            }
         }
+
+        verify(mockMoviesClient).getPopularMovies(eq(expectedPage), anyOrNull(), anyOrNull())
     }
 
 }
