@@ -6,7 +6,7 @@ import okhttp3.Response
 class AuthInterceptor(
     private val apiKey: String
 ) : Interceptor {
-    private companion object {
+    companion object {
         const val QUERY_PARAM_API_KEY = "api_key"
     }
 
