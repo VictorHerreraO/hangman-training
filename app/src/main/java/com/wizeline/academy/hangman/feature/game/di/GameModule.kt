@@ -1,4 +1,4 @@
-package com.wizeline.academy.hangman.feature.game.data.di
+package com.wizeline.academy.hangman.feature.game.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
