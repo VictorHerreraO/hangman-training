@@ -31,4 +31,6 @@
     <dimen name="login_logo_size">100dp</dimen>
     <dimen name="background_edit_text_corner_radius">8dp</dimen>
     <dimen name="button_min_width">150dp</dimen>
+    <dimen name="game_char_challenge_size">48dp</dimen>
+    <dimen name="game_hangman_max_height">200dp</dimen>
 </resources>
