@@ -2,9 +2,9 @@ package com.wizeline.academy.hangman.feature.game.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.soyvictorherrera.bdates.core.arch.BlockingUseCase
 import com.soyvictorherrera.bdates.core.arch.Mapper
 import com.wizeline.academy.hangman.BuildConfig
-import com.wizeline.academy.hangman.feature.game.domain.model.ChallengeModel
 import com.wizeline.academy.hangman.feature.game.data.datasource.MoviesRemoteDataSourceContract
 import com.wizeline.academy.hangman.feature.game.data.datasource.impl.MoviesRemoteDataSource
 import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.AuthInterceptor
@@ -14,10 +14,13 @@ import com.wizeline.academy.hangman.feature.game.data.datasource.retrofit.Movies
 import com.wizeline.academy.hangman.feature.game.data.repository.ChallengeRepositoryContract
 import com.wizeline.academy.hangman.feature.game.data.repository.impl.ChallengeRepository
 import com.wizeline.academy.hangman.feature.game.data.repository.mapper.MovieDtoToChallengeModelMapper
+import com.wizeline.academy.hangman.feature.game.domain.model.ChallengeModel
+import com.wizeline.academy.hangman.feature.game.domain.usecase.GetRandomChallengeUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import io.reactivex.rxjava3.core.Single
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -98,5 +101,10 @@ class GameModule {
     fun provideChallengeRepositoryContract(
         challengeRepository: ChallengeRepository
     ): ChallengeRepositoryContract = challengeRepository
+
+    @Provides
+    fun provideGetRandomChallengeUseCase(
+        getRandomChallengeUseCase: GetRandomChallengeUseCase
+    ): BlockingUseCase<Unit, Single<ChallengeModel>> = getRandomChallengeUseCase
 
 }
