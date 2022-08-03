@@ -55,6 +55,7 @@ dependencies {
 
     implementation "io.reactivex.rxjava3:rxjava:$rxJavaVersion"
     implementation "io.reactivex.rxjava3:rxandroid:$rxAndroidVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-rx3:$rxCoroutines"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
