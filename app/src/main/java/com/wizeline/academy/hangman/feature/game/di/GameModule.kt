@@ -2,8 +2,8 @@ package com.wizeline.academy.hangman.feature.game.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.soyvictorherrera.bdates.core.arch.BlockingUseCase
 import com.soyvictorherrera.bdates.core.arch.Mapper
+import com.wizeline.academy.hangman.core.arch.UseCase
 import com.wizeline.academy.hangman.BuildConfig
 import com.wizeline.academy.hangman.feature.game.data.datasource.MoviesRemoteDataSourceContract
 import com.wizeline.academy.hangman.feature.game.data.datasource.impl.MoviesRemoteDataSource
@@ -20,7 +20,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import io.reactivex.rxjava3.core.Single
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -105,6 +104,6 @@ class GameModule {
     @Provides
     fun provideGetRandomChallengeUseCase(
         getRandomChallengeUseCase: GetRandomChallengeUseCase
-    ): BlockingUseCase<Unit, Single<ChallengeModel>> = getRandomChallengeUseCase
+    ): UseCase<Unit, Result<ChallengeModel>> = getRandomChallengeUseCase
 
 }

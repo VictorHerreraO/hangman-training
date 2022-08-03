@@ -1,9 +1,12 @@
 package com.wizeline.academy.hangman.feature.game.domain.usecase
 
+import com.google.common.truth.Truth.assertThat
 import com.wizeline.academy.hangman.feature.game.data.repository.ChallengeRepositoryContract
 import com.wizeline.academy.hangman.testutil.TestChallengeData
 import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -11,6 +14,7 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.whenever
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(MockitoJUnitRunner::class)
 class GetRandomChallengeUseCaseTest {
 
@@ -19,7 +23,7 @@ class GetRandomChallengeUseCaseTest {
 
     private lateinit var subjectUnderTest: GetRandomChallengeUseCase
 
-    private val testScheduler = Schedulers.trampoline()
+    private val testDispatcher = UnconfinedTestDispatcher()
 
     @Before
     fun setUp() {
@@ -29,21 +33,20 @@ class GetRandomChallengeUseCaseTest {
 
         subjectUnderTest = GetRandomChallengeUseCase(
             challengeRepository = challengeRepositoryMock,
-            subscribeScheduler = testScheduler,
-            observeScheduler = testScheduler
+            dispatcher = testDispatcher
         )
     }
 
     @Test
-    fun `assert that invoke runs successfully`() {
+    fun `assert that invoke runs successfully`() = runTest {
         val expectedChallenge = TestChallengeData.challenge_1
 
-        subjectUnderTest.invoke(Unit).test().run {
-            assertComplete()
-            assertNoErrors()
-            assertValue { challenge ->
-                challenge == expectedChallenge
-            }
+        val result = subjectUnderTest.invoke(Unit)
+
+        assertThat(result).isNotNull()
+        assertThat(result.isSuccess).isTrue()
+        result.getOrThrow().let { challenge ->
+            assertThat(challenge).isEqualTo(expectedChallenge)
         }
     }
 
