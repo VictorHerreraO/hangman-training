@@ -1,7 +1,7 @@
 package com.wizeline.academy.hangman.feature.login.framework.presentation
 
 import com.google.common.truth.Truth.assertThat
-import com.soyvictorherrera.bdates.core.arch.UseCase
+import com.wizeline.academy.hangman.core.arch.UseCase
 import com.wizeline.academy.hangman.feature.common.domain.model.UserModel
 import com.wizeline.academy.hangman.testutil.MainDispatcherRule
 import com.wizeline.academy.hangman.testutil.TestUsersData

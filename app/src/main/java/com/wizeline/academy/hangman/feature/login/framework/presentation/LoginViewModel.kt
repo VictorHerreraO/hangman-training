@@ -3,7 +3,7 @@ package com.wizeline.academy.hangman.feature.login.framework.presentation
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.soyvictorherrera.bdates.core.arch.UseCase
+import com.wizeline.academy.hangman.core.arch.UseCase
 import com.wizeline.academy.hangman.core.util.Event
 import com.wizeline.academy.hangman.feature.common.domain.model.UserModel
 import dagger.hilt.android.lifecycle.HiltViewModel
