@@ -36,11 +36,12 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         rvItems.run {
-            val gridLayoutManager = GridLayoutManager(requireContext(), 8)
+            val gridLayoutManager = GridLayoutManager(requireContext(), 7)
             this.layoutManager = gridLayoutManager
-            challengeCharAdapter = ChallengeCharAdapter { index: Int, text: String ->
-                viewModel.onCharGuess(index, text)
-            }
+            challengeCharAdapter = ChallengeCharAdapter(
+                beforeCharGuess = viewModel::beforeCharGuess,
+                afterCharGuess = viewModel::afterCharGuess
+            )
             this.adapter = challengeCharAdapter
         }
         subscribeUi()

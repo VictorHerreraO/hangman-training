@@ -7,12 +7,14 @@ import androidx.recyclerview.widget.ListAdapter
 import com.wizeline.academy.hangman.feature.game.framework.presentation.ChallengeCharState
 
 class ChallengeCharAdapter(
-    private val onTextChanged: (index: Int, text: String) -> Unit
+    private val beforeCharGuess: (guess: Char?) -> Boolean,
+    private val afterCharGuess: (guess: Char?) -> Unit
 ) : ListAdapter<ChallengeCharState, ChallengeCharViewHolder>(ChallengeCharDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeCharViewHolder {
         return ChallengeCharViewHolder.inflate(
             inflater = LayoutInflater.from(parent.context),
-            onTextChanged = onTextChanged
+            beforeCharGuess = beforeCharGuess,
+            afterCharGuess = afterCharGuess
         )
     }
 

@@ -7,6 +7,6 @@
     android:background="@drawable/background_edit_text"
     android:inputType="textVisiblePassword"
     android:lines="1"
+    android:maxLength="1"
     android:textAlignment="center"
-    android:textSize="@dimen/text_12"
     tools:text="A" />
