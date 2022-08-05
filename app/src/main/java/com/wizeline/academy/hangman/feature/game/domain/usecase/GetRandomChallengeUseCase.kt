@@ -14,9 +14,15 @@ class GetRandomChallengeUseCase @Inject constructor(
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : UseCase<Unit, Result<ChallengeModel>>() {
 
+    private val regex = Regex("[^A-Z0-9 ]")
+
     override suspend fun invoke(params: Unit): Result<ChallengeModel> = withContext(dispatcher) {
         return@withContext runCatching {
-            challengeRepository.getRandomChallenge().await()
+            challengeRepository.getRandomChallenge().map {
+                it.copy(
+                    text = regex.replace(it.text.uppercase(), "")
+                )
+            }.await()
         }
     }
 

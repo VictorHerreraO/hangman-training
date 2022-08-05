@@ -31,8 +31,6 @@ class GameViewModel @Inject constructor(
 
     private val guesses = mutableListOf<Char>()
 
-    private var errorCount = 0
-
     init {
         _state.update {
             it.copy(isGameLoading = true)
@@ -42,7 +40,6 @@ class GameViewModel @Inject constructor(
                 { challenge ->
                     Log.d(TAG, "New challenge is: $challenge")
                     challenge.text
-                        .uppercase()
                         .toCharArray()
                         .mapIndexed(::ChallengeCharState)
                         .let { list ->
@@ -87,8 +84,8 @@ class GameViewModel @Inject constructor(
                     Log.d(TAG, "state updated")
                 }
             } else {
-                errorCount++
-                Log.w(TAG, "invalid guess, error count = $errorCount")
+                _state.update { it.copy(guessMistakes = it.guessMistakes.inc()) }
+                Log.w(TAG, "invalid guess, error count updated")
             }
 
         }
