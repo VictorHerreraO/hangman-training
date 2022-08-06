@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EditText xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ed_txt_char"
+    android:layout_width="@dimen/game_char_challenge_size"
+    android:layout_height="@dimen/game_char_challenge_size"
+    android:background="@drawable/background_edit_text"
+    android:inputType="textVisiblePassword"
+    android:lines="1"
+    android:maxLength="1"
+    android:textAlignment="center"
+    tools:text="A" />

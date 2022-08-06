@@ -61,7 +61,9 @@ class LoginFragment : Fragment() {
                     viewModel.navigateTo.collect { navigationEvent ->
                         navigationEvent.getContentIfNotHandled()?.let {
                             val directions = when (it) {
-                                is LoginNavigation.NavigateHome -> LoginFragmentDirections.actionNavLoginToHome()
+                                is LoginNavigation.NavigateHome -> LoginFragmentDirections.actionNavLoginToHome(
+                                    it.userId
+                                )
                             }
                             findNavController().navigate(directions)
                         }
