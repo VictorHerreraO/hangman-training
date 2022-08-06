@@ -68,11 +68,13 @@ class GameViewModel @Inject constructor(
     fun afterCharGuess(guess: Char?) {
         Log.d(TAG, "user guessed [$guess]")
         if (guess == null) return
+
         val uppercase = guess.uppercaseChar()
         if (guesses.contains(uppercase)) {
             Log.d(TAG, "already guessed")
             return
         } else guesses.add(uppercase)
+
         _state.value.run {
             val occurrence = challengeCharList.firstOrNull { it.char == uppercase }
             if (occurrence != null) {
